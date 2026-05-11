@@ -5,7 +5,7 @@ import { useShopStore, cartCountSelector } from "../../../store/shopStore";
 
 export default function TabsLayout() {
   const cartCount = useShopStore(cartCountSelector);
-sdsdsd
+
   return (
     <Tabs
     
