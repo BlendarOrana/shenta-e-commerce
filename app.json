@@ -1,36 +1,38 @@
 {
   "expo": {
-    "name": "my-expo-app",
-    "slug": "my-expo-app",
+    "name": "Shneta",
+    "slug": "Shneta",
     "version": "1.0.0",
+        "scheme": "Shneta", 
 
     "web": {
-      "favicon": "./assets/favicon.png"
+    "icon": "./assets/images/icon.png"
     },
-
     "experiments": {
       "tsconfigPaths": true
     },
-
-    "plugins": [],
-
+    "plugins": [
+      "expo-router"
+    ],
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-
+    "icon": "./assets/images/icon.png",
     "userInterfaceStyle": "light",
-
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "assetBundlePatterns": ["**/*"],
+   "backgroundColor": "#ffffff",
+          "dark": {
+            "backgroundColor": "#000000"
+          }    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
     }
