@@ -9,6 +9,7 @@ import { useRouter } from "expo-router";
 import { useShopStore } from "../../../store/shopStore";
 import ProductCard from "../../../components/ProductCard";
 
+
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 // 5:4 Aspect Ratio Calculation (Height = Width * (4/5))
 const BANNER_HEIGHT = SCREEN_WIDTH * 0.8; 
@@ -24,6 +25,27 @@ export default function ShopScreen() {
 
   const bannerRef = useRef<FlatList>(null);
   const scrollX = useRef(new Animated.Value(0)).current;
+    const toastSlideAnim = useRef(new Animated.Value(-100)).current;
+  const toastOpacityAnim = useRef(new Animated.Value(0)).current;
+
+  const showToast = () => {
+    // Reset position first (in case it's mid-animation)
+    toastSlideAnim.setValue(-100);
+    toastOpacityAnim.setValue(0);
+
+    Animated.parallel([
+      Animated.spring(toastSlideAnim, { toValue: 60, friction: 6, useNativeDriver: true }),
+      Animated.timing(toastOpacityAnim, { toValue: 1, duration: 250, useNativeDriver: true })
+    ]).start();
+
+    setTimeout(() => {
+      Animated.parallel([
+        Animated.timing(toastSlideAnim, { toValue: -100, duration: 300, useNativeDriver: true }),
+        Animated.timing(toastOpacityAnim, { toValue: 0, duration: 300, useNativeDriver: true })
+      ]).start();
+    }, 2500);
+  };
+
 
   // Initial Fetch
   useEffect(() => {
@@ -73,17 +95,9 @@ export default function ShopScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white" edges={["left", "right"]}>
-         <View 
-        style={{ 
-          position: 'absolute', 
-          bottom: 0, 
-          left: 0, 
-          right: 0, 
-          height: '50%', 
-          backgroundColor: '#f68048' // Your brand color
-        }} 
-      />
+  <SafeAreaView className="flex-1 bg-transparent" edges={["left", "right"]}>
+
+
       
       <FlatList
         data={products}
